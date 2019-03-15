@@ -4,3 +4,4 @@ target/
 *.class
 *.kotlin_module
 *.iml
+*.exe
