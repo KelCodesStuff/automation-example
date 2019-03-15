@@ -12,9 +12,10 @@ public class AssertionsDemo {
 
     @Test
     public void standardAssertions() {
-        assertEquals(8, 8);
-        assertEquals(25, 25, "The optional assertion message is now the last parameter.");
-        assertTrue('a' < 'b', () -> "Assertion messages can be lazily evaluated to avoid constructing complex messages unnecessarily.");
+        Integer rate = 50;
+        assertEquals(52 * (rate * 8 * 5), 104000);
+        assertSame(25, 25, "The optional assertion message is now the last parameter.");
+        assertTrue(50 < 100, () -> "Assertion messages can be lazily evaluated to avoid constructing complex messages unnecessarily.");
     }
 
     @Test
