@@ -12,10 +12,12 @@ public class AssertionsDemo {
 
     @Test
     public void standardAssertions() {
-        Integer rate = 50;
-        assertEquals(52 * (rate * 8 * 5), 104000);
+        int rate = 50;
+        int hours = 10;
+        int days = 5;
+        assertEquals(52 * (rate * hours * days), 130000);
         assertSame(25, 25, "The optional assertion message is now the last parameter.");
-        assertTrue(50 < 100, () -> "Assertion messages can be lazily evaluated to avoid constructing complex messages unnecessarily.");
+        assertTrue(50 == 50, () -> "Assertion messages can be lazily evaluated to avoid constructing complex messages unnecessarily.");
     }
 
     @Test
@@ -26,7 +28,9 @@ public class AssertionsDemo {
                 () -> assertSame(12, 12),
                 () -> assertSame(100, 100),
                 () -> assertEquals("A","A"),
-                () -> assertEquals("Yes","No")
+                () -> assertEquals("This is a test","This is a test"),
+                () -> assertTrue(50 == 50),
+                () -> assertTrue("A" == "A")
         );
     }
 
@@ -36,6 +40,24 @@ public class AssertionsDemo {
             throw new IllegalArgumentException("a message");
         });
         assertEquals("a message", exception.getMessage());
+    }
+
+    @Test
+    public void timeoutExceeded() {
+        // The following assertion fails with an error message similar to: execution exceeded timeout of 10 ms by 91 ms
+        assertTimeout(ofMillis(10), () -> {
+            // Simulate task that takes more than 10 ms.
+            Thread.sleep(5);
+        });
+    }
+
+    @Test
+    public void timeoutExceededWithPreemptiveTermination() {
+        // The following assertion fails with an error message similar to: execution timed out after 10 ms
+        assertTimeoutPreemptively(ofMillis(10), () -> {
+            // Simulate task that takes more than 10 ms.
+            Thread.sleep(5);
+        });
     }
 
     @Test
@@ -63,24 +85,6 @@ public class AssertionsDemo {
         // The following assertion invokes a method reference and returns an object.
         String actualGreeting = assertTimeout(ofMinutes(2), AssertionsDemo::greeting);
         assertEquals("Hello, World!", actualGreeting);
-    }
-
-    @Test
-    public void timeoutExceeded() {
-        // The following assertion fails with an error message similar to: execution exceeded timeout of 10 ms by 91 ms
-        assertTimeout(ofMillis(10), () -> {
-            // Simulate task that takes more than 10 ms.
-            Thread.sleep(9);
-        });
-    }
-
-    @Test
-    public void timeoutExceededWithPreemptiveTermination() {
-        // The following assertion fails with an error message similar to: execution timed out after 10 ms
-        assertTimeoutPreemptively(ofMillis(10), () -> {
-            // Simulate task that takes more than 10 ms.
-            Thread.sleep(9);
-        });
     }
 
     private static String greeting() {
