@@ -1,12 +1,9 @@
 package com.samples;
 
-import static java.time.Duration.ofMillis;
-import static java.time.Duration.ofMinutes;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-
 import org.junit.Test;
+
+import static java.time.Duration.ofMinutes;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AssertionsDemo {
 
@@ -26,11 +23,14 @@ public class AssertionsDemo {
         // failures will be reported together.
         assertAll(
                 () -> assertSame(12, 12),
-                () -> assertSame(100, 100),
-                () -> assertEquals("A","A"),
+                () -> assertSame("Code", "Code"),
+                () -> assertNotSame(12, 123),
+                () -> assertNotSame("A", "Aa"),
+
+                () -> assertEquals(18,18),
                 () -> assertEquals("This is a test","This is a test"),
-                () -> assertTrue(50 == 50),
-                () -> assertTrue("A" == "A")
+                () -> assertNotEquals(35,25),
+                () -> assertNotEquals("Automation is cool","Automation cool")
         );
     }
 
@@ -40,24 +40,6 @@ public class AssertionsDemo {
             throw new IllegalArgumentException("a message");
         });
         assertEquals("a message", exception.getMessage());
-    }
-
-    @Test
-    public void timeoutExceeded() {
-        // The following assertion fails with an error message similar to: execution exceeded timeout of 10 ms by 91 ms
-        assertTimeout(ofMillis(10), () -> {
-            // Simulate task that takes more than 10 ms.
-            Thread.sleep(5);
-        });
-    }
-
-    @Test
-    public void timeoutExceededWithPreemptiveTermination() {
-        // The following assertion fails with an error message similar to: execution timed out after 10 ms
-        assertTimeoutPreemptively(ofMillis(10), () -> {
-            // Simulate task that takes more than 10 ms.
-            Thread.sleep(5);
-        });
     }
 
     @Test
