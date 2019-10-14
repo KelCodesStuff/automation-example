@@ -2,17 +2,12 @@ package com.endToEnd;
 
 import com.framework.BaseFramework;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ErrorCollector;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SearchItemTest extends BaseFramework {
-
-    @Rule
-    public ErrorCollector collector = new ErrorCollector();
 
     /**
      * Searches for item
