@@ -1,51 +1,34 @@
 package com.endToEnd;
 
 import com.framework.BaseFramework;
-import org.junit.Test;
-import org.openqa.selenium.By;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Login extends BaseFramework {
 
-    @Test
-    public void navigateToHomepage() {
-
-        driver.get(getConfiguration("Homepage"));
-
-        driver.findElement(By.xpath(" ")).sendKeys("Email");
-
-        driver.findElement(By.xpath(" ")).sendKeys("Password");
-
-        driver.findElement(By.xpath(" ")).click();
-
-    }
+    static String username = "";
+    static String password = "";
+    String url = "https://www.amazon.com/";
 
     @Test
-    public void test1() {
+    public void login() throws InterruptedException {
 
-        driver.get(getConfiguration("Homepage"));
+        driver.get(url);
 
-        assertSame("Abc", "Abc");
+        driver.findElement(By.id("gb_70")).click();
+//        driver.findElement(By.className("nav-action-inner")).click();
 
-    }
+        driver.findElement(By.id("identifierId")).sendKeys(username);
+        driver.findElement(By.xpath("//*[@id=\"identifierNext\"]/span/span")).click();
 
-    @Test
-    public void test2() {
+        Thread.sleep(3000);
+        driver.findElement(By.name("password")).sendKeys(password);
+        driver.findElement(By.xpath("//*[@id=\"passwordNext\"]/span/span")).click();
 
-        driver.get(getConfiguration("Homepage"));
-
-        assertTrue(8 < 18);
-
-    }
-
-    @Test
-    public void test3() {
-
-        driver.get(getConfiguration("Homepage"));
-
-        assertEquals(80, 80);
+        assertEquals("https://www.amazon.com/", url);
 
     }
-
 }
