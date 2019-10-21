@@ -1,4 +1,4 @@
-package com.samples;
+package com.examples;
 
 import com.framework.BaseFramework;
 import org.junit.jupiter.api.Test;
