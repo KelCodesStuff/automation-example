@@ -51,11 +51,11 @@ public abstract class BaseFramework {
     public void setUpBefore() {
         DesiredCapabilities capabilities;
         // Which driver to use?
-        if (DRIVER_CHROME.equalsIgnoreCase(configuration.getProperty("Browser"))) {
+        if (DRIVER_CHROME.equalsIgnoreCase(configuration.getProperty("BROWSER"))) {
             capabilities = DesiredCapabilities.chrome();
             driver = new ChromeDriver(capabilities);
         }
-        else if (DRIVER_FIREFOX.equalsIgnoreCase(configuration.getProperty("Browser"))) {
+        else if (DRIVER_FIREFOX.equalsIgnoreCase(configuration.getProperty("BROWSER"))) {
             capabilities = DesiredCapabilities.firefox();
             driver = new FirefoxDriver(capabilities);
         }
