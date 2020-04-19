@@ -1,4 +1,4 @@
-# KelTest
+# Automation Example
 
 **Follow the steps to run the tests on your local machine.**
 
