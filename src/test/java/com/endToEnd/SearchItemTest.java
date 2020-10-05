@@ -15,9 +15,12 @@ public class SearchItemTest extends BaseFramework {
     @Test
     public void search() {
 
-        driver.get(getConfiguration("Homepage"));
+        driver.get(getConfiguration("HOMEPAGE"));
 
-        driver.findElement(By.id("twotabsearchtextbox")).sendKeys("PlayStation 4");
+        driver.findElement(By.id("twotabsearchtextbox")).click();
+        driver.findElement(By.id("twotabsearchtextbox")).submit();
+
+        driver.findElement(By.className("a-size-medium a-color-base a-text-normal")).click();
     }
 
     @Test
