@@ -14,7 +14,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -45,6 +44,7 @@ public abstract class BaseFramework {
         input.close();
 
         WebDriverManager.chromedriver().setup();
+        WebDriverManager.firefoxdriver().setup();
     }
 
     @BeforeEach
@@ -61,7 +61,7 @@ public abstract class BaseFramework {
         }
 
         // Define fluent wait
-        wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(15))
+        wait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(10))
                 .pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class);
     }
 

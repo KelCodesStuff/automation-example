@@ -3,11 +3,12 @@ package com.endToEnd;
 import com.framework.BaseFramework;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Main extends BaseFramework {
 
-    static String username = "username";
-    static String password = "password";
+    static String username = " ";
+    static Integer password = 123;
 
     @Test
     public void login() throws InterruptedException {
@@ -15,15 +16,14 @@ public class Main extends BaseFramework {
         // The HOMEPAGE is set in the automation.properties file
         driver.get(getConfiguration("HOMEPAGE"));
 
-        driver.findElement(By.id("nav-link-accountList")).click();
-        driver.findElement(By.className("nav-action-inner")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("ac-gn-bag"))).click();
 
-        driver.findElement(By.id("identifierId")).sendKeys(username);
-        driver.findElement(By.xpath("//*[@id=\"identifierNext\"]/span/span")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ac-gn-bagview-content\"]/nav/ul/li[5]/a"))).click();
 
         Thread.sleep(3000);
-        driver.findElement(By.name("password")).sendKeys(password);
-        driver.findElement(By.xpath("//*[@id=\"passwordNext\"]/span/span")).click();
+        driver.findElement(By.id("recon-0-0")).sendKeys(username);
+        driver.findElement(By.id("recon-0-1")).sendKeys();
+        driver.findElement(By.id("signInButtonId")).click();
 
     }
 }
