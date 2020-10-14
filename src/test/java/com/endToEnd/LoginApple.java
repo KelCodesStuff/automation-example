@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Login extends BaseFramework {
+public class LoginApple extends BaseFramework {
 
     /**
      * This is a basic login file for creating tests
@@ -15,7 +15,7 @@ public class Login extends BaseFramework {
 
     String username = " ";
     String password = " ";
-    String url = "https://www.apple.com/";
+    String url = "https://www.stockx.com/";
 
     @Test
     public void login() throws InterruptedException {
