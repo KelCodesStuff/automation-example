@@ -18,7 +18,7 @@ public class LoginStockX extends BaseFramework {
 
     @Test
     public void login() throws InterruptedException {
-        driver.get(url);
+        driver.navigate().to(url);
 
         //clicks login button
         wait.until(ExpectedConditions.elementToBeClickable(By.id("nav-login"))).click();
