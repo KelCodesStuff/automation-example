@@ -30,7 +30,7 @@ public class VinetiTest extends BaseFramework {
     @Test
     @Order(1)
     public void signup() throws InterruptedException {
-        driver.get(url);
+        driver.navigate().to(url);
 
         //clicks signup button
         wait.until(ExpectedConditions.elementToBeClickable(By.id("signin2"))).click();
