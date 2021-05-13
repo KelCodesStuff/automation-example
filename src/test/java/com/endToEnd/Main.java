@@ -7,23 +7,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Main extends BaseFramework {
 
-    static String username = " ";
+    String url = "https://www.google.com/";
+    static String username = "Kelvin Reid";
     static Integer password = 123;
 
     @Test
     public void login() throws InterruptedException {
+        driver.navigate().to(url);
 
         // The HOMEPAGE is set in the automation.properties file
 //        driver.get(getConfiguration("HOMEPAGE"));
-
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("ac-gn-bag"))).click();
-
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ac-gn-bagview-content\"]/nav/ul/li[5]/a"))).click();
-
-        Thread.sleep(3000);
-        driver.findElement(By.id("recon-0-0")).sendKeys(username);
-        driver.findElement(By.id("recon-0-1")).sendKeys();
-        driver.findElement(By.id("signInButtonId")).click();
 
     }
 }
