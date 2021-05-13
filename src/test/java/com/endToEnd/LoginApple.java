@@ -13,25 +13,27 @@ public class LoginApple extends BaseFramework {
      * This is a basic login file for creating tests
      */
 
-    String username = " ";
-    String password = " ";
     String url = "https://www.apple.com/";
+    String username = "User01";
+    String password = "Test1234";
 
     @Test
     public void login() throws InterruptedException {
-
-        driver.get(url);
+        driver.navigate().to(url);
 
         wait.until(ExpectedConditions.elementToBeClickable(By.id("ac-gn-bag"))).click();
-
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ac-gn-bagview-content\"]/nav/ul/li[5]/a"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By
+                .xpath("//*[@id=\"ac-gn-bagview-content\"]/nav/ul/li[5]/a"))).click();
 
         Thread.sleep(3000);
-        driver.findElement(By.id("recon-0-0")).sendKeys(username);
-        driver.findElement(By.id("recon-0-1")).sendKeys(password);
-        driver.findElement(By.id("signInButtonId")).click();
+        driver.findElement(By.id("signIn.customerLogin.appleId")).sendKeys(username);
+        driver.findElement(By.id("signIn.customerLogin.password")).sendKeys(password);
+        driver.findElement(By.id("signin-submit-button")).click();
 
-        assertEquals("https://www.apple.com/", url);
+        String strUrl = driver.getCurrentUrl();
+        System.out.println("Current Url is:"+ strUrl);
+
+        assertNotEquals("https://www.apple.com/", strUrl);
 
     }
 }
