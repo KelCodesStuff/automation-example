@@ -1,6 +1,5 @@
 package com.framework;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
@@ -14,8 +13,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.slf4j.Logger;
@@ -27,11 +27,10 @@ public abstract class BaseFramework {
     protected Wait<WebDriver> wait;
 
     private static final Logger LOG = LoggerFactory.getLogger(BaseFramework.class);
-    private static final String CONFIG_FILE = "./config/automation.properties";
+    private static final String CONFIG_FILE = "./src/main/resources/config/automation.properties";
     private static final String DRIVER_CHROME = "chrome";
     private static final String DRIVER_FIREFOX = "firefox";
     private static Properties configuration;
-
 
     @BeforeAll
     public static void beforeClass() throws IOException {
@@ -39,7 +38,7 @@ public abstract class BaseFramework {
         FileInputStream input;
 
         LOG.info("Loading in configuration file.");
-        input = new FileInputStream(new File(CONFIG_FILE));
+        input = new FileInputStream(CONFIG_FILE);
         configuration.loadFromXML(input);
         input.close();
 
@@ -49,15 +48,16 @@ public abstract class BaseFramework {
 
     @BeforeEach
     public void setUpBefore() {
-        DesiredCapabilities capabilities;
         // Which driver to use?
         if (DRIVER_CHROME.equalsIgnoreCase(configuration.getProperty("BROWSER"))) {
-            capabilities = DesiredCapabilities.chrome();
-            driver = new ChromeDriver(capabilities);
+            ChromeOptions options = new ChromeOptions();
+            options.setCapability("capability_name", "capability_value");
+            driver = new ChromeDriver(options);
         }
         else if (DRIVER_FIREFOX.equalsIgnoreCase(configuration.getProperty("BROWSER"))) {
-            capabilities = DesiredCapabilities.firefox();
-            driver = new FirefoxDriver(capabilities);
+            FirefoxOptions options = new FirefoxOptions();
+            options.setCapability("capability_name", "capability_value");
+            driver = new FirefoxDriver(options);
         }
 
         // Define fluent wait
@@ -68,11 +68,7 @@ public abstract class BaseFramework {
     @AfterEach
     public void tearDown() {
         System.out.println("Quitting the driver");
-//        driver.quit();
-    }
-
-    protected static String getConfiguration(String config) {
-        return configuration.getProperty(config);
+        driver.quit();
     }
 }
 
