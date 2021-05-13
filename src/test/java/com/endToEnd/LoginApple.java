@@ -15,7 +15,7 @@ public class LoginApple extends BaseFramework {
 
     String username = " ";
     String password = " ";
-    String url = "https://www.stockx.com/";
+    String url = "https://www.apple.com/";
 
     @Test
     public void login() throws InterruptedException {
