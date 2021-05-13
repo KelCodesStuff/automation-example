@@ -14,7 +14,7 @@ public class Main extends BaseFramework {
     public void login() throws InterruptedException {
 
         // The HOMEPAGE is set in the automation.properties file
-        driver.get(getConfiguration("HOMEPAGE"));
+//        driver.get(getConfiguration("HOMEPAGE"));
 
         wait.until(ExpectedConditions.elementToBeClickable(By.id("ac-gn-bag"))).click();
 
