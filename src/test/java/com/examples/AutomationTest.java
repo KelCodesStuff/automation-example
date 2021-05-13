@@ -12,7 +12,7 @@ public class AutomationTest extends BaseFramework {
     @Test
     public void navigateToHomePage() {
 
-        driver.get(getConfiguration("Homepage"));
+//        driver.get(getConfiguration("Homepage"));
     }
 
     /**
